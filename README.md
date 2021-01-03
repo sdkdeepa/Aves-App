@@ -34,11 +34,11 @@ The video of this application can be found here: https://youtu.be/CfkXlrWH_qQ
 ### Installation
    Use the node package manager to install Aves app
    
-      `cd backend
+       cd backend
        npm install
 
        cd ../frontend
-       npm install`
+       npm install
       
 ### To start the client in localhost
 
@@ -47,8 +47,8 @@ The video of this application can be found here: https://youtu.be/CfkXlrWH_qQ
 
 The client can be installed and run locally in http://localhost:3000/
 
-      `cd client
-       npm runstart`
+       cd client
+       npm runstart
 
 # Endpoints:
   - GET - https://ptzezohp22.execute-api.us-east-2.amazonaws.com/dev/images
