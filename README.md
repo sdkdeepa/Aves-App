@@ -54,14 +54,26 @@ The video of this application can be found here: https://youtu.be/CfkXlrWH_qQ
 
 ![Alt text](screenshots/s3buckets.png?raw=true "s3buckets")
 
-### AWS lambdas
-![Alt text](
+![Alt text](screenshots/s3Images.png.png?raw=true "s3Images")
 
-### API Gateway
-![Alt text](
+### AWS lambdas
+![Alt text](screenshots/aws-lamdas.png?raw=true "aws-lamdas")
+
 
 ### XRay service map
-![Alt text](
+![Alt text](screenshots/XRay.png?raw=true "XRay")
+
+
+# Error Handling
+
+### User not logged in
+
+![Alt text](screenshots/Error-1.png?raw=true "Error-1")
+
+
+### User tries to upload with choosing an image
+
+![Alt text](screenshots/Error-2.png?raw=true "Error-2")
 
 
 
