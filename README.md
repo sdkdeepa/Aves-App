@@ -120,7 +120,7 @@ The client can be installed and run locally in http://localhost:3000/
 
 # Nanodegree Certificate
 
-[embed]https://github.com/sdkdeepa/Udacity-CDN-Capstone-project/blob/main/CloudDeveloperNanodegree.pdf [/embed] 
+[CloudDeveloperNanodegree.pdf](https://github.com/sdkdeepa/Udacity-CDN-Capstone-project/blob/main/CloudDeveloperNanodegree.pdf)
 
 
 
