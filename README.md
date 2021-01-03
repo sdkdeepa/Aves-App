@@ -1,4 +1,4 @@
-# Udacity Cloud Developer Capstone Project
+# Udacity Cloud Developer Nanodegree Capstone Project
 
 I developed an image uploading app for birds called "AVES APP". This app caters for bird lovers who can upload beautiful images of birds. This app was also tested using local environment (user based testing).The techology used behind in devloping this app is as follows:
 
