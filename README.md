@@ -94,10 +94,8 @@ The client can be installed and run locally in http://localhost:3000/
 ![Alt text](screenshots/XRay.png?raw=true "XRay")
 
 # Successful upload message:
-![Alt text](screenshots/upload-successful.png?raw=true "upload-successful"
 
-![Alt text](screenshots/image-uploaded.png?raw=true "image-uploaded"
-
+![Alt text](screenshots/upload-successful.png?raw=true "upload-successful")
 
 # Error Handling:
 
