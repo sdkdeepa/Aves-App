@@ -2,7 +2,7 @@
 
 I developed a image uploading app for birds called "AVES APP". This app caters for bird lovers who can upload beautiful images of birds. The techology used behind in devloping this app is as follows:
 
-- AWS
+- AWS Services used
    
    - Lambdas for storing functions
    - DynamoDB
@@ -10,25 +10,28 @@ I developed a image uploading app for birds called "AVES APP". This app caters f
    - S3 Bucket (storage of images)
    - CloudFormation (infrastructure as code, provisioning a collection of needed resources)
    - IAM user
+   - XRay 
    
-- Serverless Framework
+- Serverless Framework 
 
 - Frontend client
    - ReactJS
    
 - Auth0
-   - for 3rd party OAuth integration 
+   - OAuth integration for 3rd party apps
    - RS256 Algorithm
 
-- Optimisations
+- Few Optimisations added
    - Global Secondary Indexes on DynamoDB
-   - X-ray to analyze and debug production, distributed applications
+   - Xray for debugging logs 
 
 The video of this application can be found here: https://youtu.be/CfkXlrWH_qQ
 
 # Screenshots
 
 ### serveless deployment
+
+![Alt text](screenshots/sls%20deployed.png?raw=true "sls deployed")
 
 
 ### CloudFormation
