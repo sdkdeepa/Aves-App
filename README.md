@@ -24,8 +24,33 @@ I developed a image uploading app for birds called "AVES APP". This app caters f
 - Few Optimisations added
    - Global Secondary Indexes on DynamoDB
    - Xray for debugging logs 
+   
+# App functionality video:
 
 The video of this application can be found here: https://youtu.be/CfkXlrWH_qQ
+
+# Getting started:
+
+### Installation
+   Use the node package manager to install Aves app
+
+`
+      cd backend
+      npm install
+
+      cd ../frontend
+      npm install
+`
+### To start the client in localhost
+
+- Update client/src/config.ts credentials to match your Auth0 account and 
+- Serverless deployment 
+
+The client can be installed and run locally
+`
+      cd client
+      npm runstart
+`
 
 # Endpoints:
   - GET - https://ptzezohp22.execute-api.us-east-2.amazonaws.com/dev/images
@@ -44,36 +69,39 @@ The video of this application can be found here: https://youtu.be/CfkXlrWH_qQ
 
 # Screenshots
 
-### Serveless deployment
+### Serveless deployment:
+
 ![Alt text](screenshots/sls%20deployed.png?raw=true "sls deployed")
 
-### CloudFormation
+### CloudFormation:
 
 ![Alt text](screenshots/CloudFormation.png?raw=true "CloudFormation")
 
-### s3 buckets
+### s3 buckets:
 
 ![Alt text](screenshots/s3buckets.png?raw=true "s3buckets")
 
 
 ![Alt text](screenshots/s3Images.png?raw=true "s3Images")
 
-### AWS lambdas
+### AWS lambdas:
+
 ![Alt text](screenshots/aws-lamdas.png?raw=true "aws-lamdas")
 
 
-### XRay service map
+### XRay service map:
+
 ![Alt text](screenshots/XRay.png?raw=true "XRay")
 
 
-# Error Handling
+# Error Handling:
 
-### User not logged in
+### User not logged in:
 
 ![Alt text](screenshots/Error-1.png?raw=true "Error-1")
 
 
-### User tries to upload with choosing an image
+### User tries to upload with choosing an image:
 
 ![Alt text](screenshots/Error-2.png?raw=true "Error-2")
 
