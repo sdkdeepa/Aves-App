@@ -1,6 +1,6 @@
 # Udacity Cloud Developer Capstone Project
 
-I developed an image uploading app for birds called "AVES APP". This app caters for bird lovers who can upload beautiful images of birds. The techology used behind in devloping this app is as follows:
+I developed an image uploading app for birds called "AVES APP". This app caters for bird lovers who can upload beautiful images of birds. This app was also tested using local environment (user based testing).The techology used behind in devloping this app is as follows:
 
 ### AWS Services 
    
@@ -46,7 +46,7 @@ The video of this application can be found here: https://youtu.be/CfkXlrWH_qQ
 - Update client/src/config.ts credentials to match your Auth0 account and 
 - Serverless deployment 
 
-The client can be installed and run locally
+The client can be installed and run locally in http://localhost:3000/
 `
       cd client
       npm runstart
@@ -93,6 +93,11 @@ The client can be installed and run locally
 
 ![Alt text](screenshots/XRay.png?raw=true "XRay")
 
+# Successful upload message:
+![Alt text](screenshots/upload-successful.png?raw=true "upload-successful"
+
+![Alt text](screenshots/image-uploaded.png?raw=true "image-uploaded"
+
 
 # Error Handling:
 
@@ -104,6 +109,8 @@ The client can be installed and run locally
 ### User tries to upload with choosing an image:
 
 ![Alt text](screenshots/Error-2.png?raw=true "Error-2")
+
+
 
 
 
