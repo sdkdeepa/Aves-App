@@ -1,8 +1,8 @@
 # Udacity Cloud Developer Capstone Project
 
-I developed a image uploading app for birds called "AVES APP". This app caters for bird lovers who can upload beautiful images of birds. The techology used behind in devloping this app is as follows:
+I developed an image uploading app for birds called "AVES APP". This app caters for bird lovers who can upload beautiful images of birds. The techology used behind in devloping this app is as follows:
 
-- AWS Services used
+### AWS Services 
    
    - Lambdas for storing functions
    - DynamoDB
@@ -12,16 +12,16 @@ I developed a image uploading app for birds called "AVES APP". This app caters f
    - IAM user
    - XRay 
    
-- Serverless Framework 
+### Serverless Framework 
 
-- Frontend client
+### Frontend client
    - ReactJS
    
-- Auth0
+### Auth0
    - OAuth integration for 3rd party apps
    - RS256 Algorithm
 
-- Few Optimisations added
+### Few Optimisations added
    - Global Secondary Indexes on DynamoDB
    - Xray for debugging logs 
    
