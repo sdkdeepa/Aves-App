@@ -1,0 +1,47 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Serverless webpack example using Typescript",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "aws-xray-sdk": "^3.1.0",
+    "axios": "^0.19.2",
+    "cors": "^2.8.5",
+    "elasticsearch": "^16.7.1",
+    "http-aws-es": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "middy": "^0.36.0",
+    "moment": "^2.27.0",
+    "moment-timezone": "^0.5.31",
+    "source-map-support": "0.5.11",
+    "uuid": "^8.3.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.17",
+    "@types/elasticsearch": "^5.0.36",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/node": "^10.12.18",
+    "@types/serverless": "^1.72.5",
+    "aws-sdk": "^2.728.0",
+    "eslint": "^7.6.0",
+    "fork-ts-checker-webpack-plugin": "^3.0.1",
+    "serverless-aws-documentation": "^1.1.0",
+    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-iam-roles-per-function": "^2.0.2",
+    "serverless-offline": "^6.7.0",
+    "serverless-plugin-tracing": "^2.0.0",
+    "serverless-reqvalidator-plugin": "^1.0.3",
+    "serverless-webpack": "^5.2.0",
+    "ts-loader": "^5.3.3",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7",
+    "webpack": "^4.29.0",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "author": "Plora Tran",
+  "license": "MIT"
+}

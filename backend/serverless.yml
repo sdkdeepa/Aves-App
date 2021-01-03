@@ -1,0 +1,271 @@
+service: 
+  name: Aves
+
+plugins:
+  - serverless-webpack
+  - serverless-iam-roles-per-function # define iam role each function
+  - serverless-aws-documentation # documenting app info
+  # - serverless-dynamodb-local # emulate DynamoDB locally 
+  - serverless-plugin-tracing
+  # - serverless-dynamodb-local
+  # - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-2'}
+
+  tracing: true # enable tracing i.e Lambda, API Gateway
+  
+  environment: 
+      IMAGES_TABLE: aves-Images-${self:provider.stage}
+      IMAGES_S3_BUCKET: aves-s3-${self:provider.stage}
+      IMAGE_INDEX: aves-index-table-${self:provider.stage }
+      SIGNED_URL_EXPIRATION: 300
+
+custom: 
+  # serverless-offline: 
+  #   port: 3003 # run server port 3003
+  # dynamodb: 
+  #   start: 
+  #     port: 8000 # run dynamodb port 8000
+  #     inMemory: true # store data in memory
+  #     migrate: true # create table according to definition in YAML
+  #   stages: 
+  #     - dev
+  documentation: 
+    api: 
+      info: 
+        version: v1.0.0
+        title: Aves-API 
+        description: Udacity Capstone Project
+    # JSON Schema to validate HTTP request using serverless-reqvalidator-plugin
+    models: 
+      - name: CreateRequest
+        contentType: application/json
+        schema: ${file(req-validator/create-image-request.json)}
+      - name: UpdateRequest
+        contentType: application/json
+        schema: ${file(req-validator/update-image-request.json)}
+    
+
+functions: 
+  Auth: 
+    handler: src/lambda/auth/auth0Authorizer.handler
+    iamRoleStatements:
+      - Effect: Allow # xray permissions
+        Action:
+          - "xray:PutTraceSegments"
+          - "xray:PutTelemetryRecords"
+        Resource:
+          - "*"
+
+  getImages:
+    handler: src/lambda/http/getImages.handler
+    iamRoleStatements:
+      - Effect: Allow # xray permissions
+        Action:
+          - "xray:PutTraceSegments"
+          - "xray:PutTelemetryRecords"
+        Resource:
+          - "*"
+      - Effect: Allow # permission to Query table
+        Action:
+          - dynamodb:Query
+        # Query from IMAGE INDEX TABLE 
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.IMAGES_TABLE}/index/${self:provider.environment.IMAGE_INDEX}
+    events:
+      - http:
+          method: get
+          path: images
+          cors: true
+          authorizer: Auth
+          reqValidatorName: RequestBodyValidator
+
+  createImage: 
+    handler: src/lambda/http/createImage.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:PutItem # allow to insert new item into table
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.IMAGES_TABLE}
+      - Effect: Allow # xray permissions
+        Action:
+          - "xray:PutTraceSegments"
+          - "xray:PutTelemetryRecords"
+        Resource:
+          - "*"
+    events:
+      - http:
+          method: post
+          path: images
+          cors: true
+          authorizer: Auth
+          reqValidatorName: RequestBodyValidator
+          documentation: 
+            summary: Create a new image
+            description: Create a new image
+            requestModels: 
+              'application/json': CreateRequest
+
+  updateImage: 
+    handler: src/lambda/http/updateImage.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:UpdateItem # allow to update new item in the table
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.IMAGES_TABLE}
+      - Effect: Allow # xray permissions
+        Action:
+          - "xray:PutTraceSegments"
+          - "xray:PutTelemetryRecords"
+        Resource:
+          - "*"
+    events: 
+      - http:
+          method: patch # PUT method
+          path: images/{imageId} # update based on imageId
+          cors: true
+          authorizer: Auth
+          reqValidatorName: RequestBodyValidator
+          documentation: 
+            summary: Update an image
+            description: Update an image
+            requestModels: 
+              'application/json': UpdateRequest
+
+  deleteImage: 
+    handler: src/lambda/http/deleteImage.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:DeleteItem # allow to update new item in the table
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.IMAGES_TABLE}
+      - Effect: Allow # xray permissions
+        Action:
+          - "xray:PutTraceSegments"
+          - "xray:PutTelemetryRecords"
+        Resource:
+          - "*"
+    events: 
+      - http:
+          method: delete # PUT method
+          path: images/{imageId} # update based on imageId
+          cors: true
+          authorizer: Auth
+          reqValidatorName: RequestBodyValidator
+          documentation: 
+            summary: Delete an image
+            description: Delete an image
+
+  generateUploadUrl: 
+    handler: src/lambda/http/generateUpload.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - s3:PutObject # allow to PUT object to S3 bucket
+          - s3:GetObject # allow to GET object to S3 bucket
+        Resource: arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}/*
+      - Effect: Allow # xray permissions
+        Action:
+          - "xray:PutTraceSegments"
+          - "xray:PutTelemetryRecords"
+        Resource:
+          - "*"
+    events:
+      - http:
+          method: post
+          path: images/s3/{imageId}
+          cors: true
+          authorizer: Auth
+    
+resources: 
+  Resources:
+    # 5) Configure S3 bucket policy: 
+    BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        PolicyDocument:
+          Id: MyPolicy
+          Version: '2012-10-17'
+          Statement:
+            - Sid: PublicReadForGetBucketObjects
+              Effect: Allow
+              Principal: '*'
+              Action: 's3:GetObject'
+              Resource: arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}/*
+        Bucket: !Ref AttachmentsBucket
+
+    # 4) Configure S3 attachment: 
+    AttachmentsBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:provider.environment.IMAGES_S3_BUCKET}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - '*'
+              AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
+    # 1) Validator Request Body: 
+    RequestBodyValidator:
+      Type: AWS::ApiGateway::RequestValidator
+      Properties: 
+        Name: 'request-body-validator'
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        ValidateRequestBody: true
+        ValidateRequestParameters: false
+    
+    # 2) Response from 400+ error: 
+    GatewayResponseDefault4XX:
+      Type: AWS::ApiGateway::GatewayResponse
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+          gatewayresponse.header.Access-Control-Allow-Methods: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: ApiGatewayRestApi
+
+    # 3) Images DynamoDB Table: 
+    ImagesDynamoDBTable: 
+      Type: AWS::DynamoDB::Table 
+      Properties: 
+        AttributeDefinitions: 
+          - AttributeName: userId # partition key
+            AttributeType: S 
+          - AttributeName: imageId 
+            AttributeType: S 
+          - AttributeName: createdAt
+            AttributeType: S
+        KeySchema: 
+          # 1:M (1 user => Many images)
+          - AttributeName: userId
+            KeyType: HASH # partition key
+          - AttributeName: imageId 
+            KeyType: RANGE # sort key
+        BillingMode: PAY_PER_REQUEST # On-demand Capacity Mode
+        TableName: ${self:provider.environment.IMAGES_TABLE}
+
+        # Secondary Index: 
+        GlobalSecondaryIndexes: 
+          - IndexName: ${self:provider.environment.IMAGE_INDEX}
+            Projection: 
+              ProjectionType: ALL # Other options: KEYS_ONLY, INCLUDE 
+            KeySchema: 
+              - AttributeName: userId # partition key must be same with base table 
+                KeyType: HASH # partition key
+              - AttributeName: createdAt 
+                KeyType: RANGE 
+                    

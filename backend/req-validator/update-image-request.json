@@ -1,0 +1,12 @@
+{ 
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "update-image", 
+    "type": "object", 
+    "properties": {
+        "description": {
+            "type": "string"
+        }
+    }, 
+    "required": ["description"], 
+    "additionalProperties": false
+}
