@@ -96,10 +96,15 @@ The client can be installed and run locally in http://localhost:3000/
 
 ### Auth0
 
+![Alt text](screenshots/Auth0.png?raw=true "Auth0")
+
 
 # Successful upload message:
 
 ![Alt text](screenshots/upload-successful.png?raw=true "upload-successful")
+
+![Alt text](screenshots/image-uploaded.png?raw=true "image-uploaded")
+
 
 # Error Handling:
 
