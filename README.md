@@ -93,6 +93,10 @@ The client can be installed and run locally in http://localhost:3000/
 
 ![Alt text](screenshots/XRay.png?raw=true "XRay")
 
+
+### Auth0
+
+
 # Successful upload message:
 
 ![Alt text](screenshots/upload-successful.png?raw=true "upload-successful")
