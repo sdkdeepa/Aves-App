@@ -113,7 +113,7 @@ The client can be installed and run locally in http://localhost:3000/
 ![Alt text](screenshots/Error-1.png?raw=true "Error-1")
 
 
-### User tries to upload with choosing an image:
+### User tries to upload without choosing an image:
 
 ![Alt text](screenshots/Error-2.png?raw=true "Error-2")
 
