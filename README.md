@@ -49,7 +49,7 @@ The video of this application can be found here: https://youtu.be/CfkXlrWH_qQ
 
 ### CloudFormation
 
-![Alt text](screenshots/CloudFormation.pngraw=true "CloudFormation")
+![Alt text](screenshots/CloudFormation.png?raw=true "CloudFormation")
 
 ### s3 buckets
 
