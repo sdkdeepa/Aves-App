@@ -27,27 +27,41 @@ I developed a image uploading app for birds called "AVES APP". This app caters f
 
 The video of this application can be found here: https://youtu.be/CfkXlrWH_qQ
 
+# Endpoints:
+  GET - https://ptzezohp22.execute-api.us-east-2.amazonaws.com/dev/images
+  POST - https://ptzezohp22.execute-api.us-east-2.amazonaws.com/dev/images
+  PATCH - https://ptzezohp22.execute-api.us-east-2.amazonaws.com/dev/images/{imageId}
+  DELETE - https://ptzezohp22.execute-api.us-east-2.amazonaws.com/dev/images/{imageId}
+  POST - https://ptzezohp22.execute-api.us-east-2.amazonaws.com/dev/images/s3/{imageId}
+  
+# Functions:
+  Auth: Aves-dev-Auth
+  getImages: Aves-dev-getImages
+  createImage: Aves-dev-createImage
+  updateImage: Aves-dev-updateImage
+  deleteImage: Aves-dev-deleteImage
+  generateUploadUrl: Aves-dev-generateUploadUrl
+
 # Screenshots
 
-### serveless deployment
-
+### Serveless deployment
 ![Alt text](screenshots/sls%20deployed.png?raw=true "sls deployed")
 
-
 ### CloudFormation
+![Alt text](screenshots/CloudFormation.pngraw=true "CloudFormation")
 
+### s3 buckets
 
-### s3 bucket
-
+![Alt text](screenshots/s3buckets.png?raw=true "s3buckets")
 
 ### AWS lambdas
-
+![Alt text](
 
 ### API Gateway
-
+![Alt text](
 
 ### XRay service map
-
+![Alt text](
 
 
 
