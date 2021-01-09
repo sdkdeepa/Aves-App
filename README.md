@@ -27,7 +27,7 @@ I developed an image uploading app for birds called "AVES APP". This app caters 
    
 # App functionality video:
 
-The video of this application can be found here: https://youtu.be/CfkXlrWH_qQ
+The video of this application can be found here: https://youtu.be/k7BTm2mjsHE
 
 # Getting started:
 
